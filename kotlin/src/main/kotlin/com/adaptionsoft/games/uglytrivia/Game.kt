@@ -19,16 +19,20 @@ class Game {
     
     init {
         for (i in 0..49) {
-            popQuestions.addLast("Pop Question " + i)
-            scienceQuestions.addLast("Science Question " + i)
-            sportsQuestions.addLast("Sports Question " + i)
+            popQuestions.addLast(createPopQuestion(i))
+            scienceQuestions.addLast(createScienceQuestion(i))
+            sportsQuestions.addLast(createSportsQuestion(i))
             rockQuestions.addLast(createRockQuestion(i))
         }
     }
 
-    fun createRockQuestion(index: Int): String {
-        return "Rock Question " + index
-    }
+    private fun createPopQuestion(index: Int) = "Pop Question " + index
+
+    private fun createScienceQuestion(index: Int) = "Science Question " + index
+
+    private fun createSportsQuestion(index: Int) = "Sports Question " + index
+
+    private fun createRockQuestion(index: Int) = "Rock Question " + index
 
     fun isPlayable(): Boolean {
         return howManyPlayers() >= 2
