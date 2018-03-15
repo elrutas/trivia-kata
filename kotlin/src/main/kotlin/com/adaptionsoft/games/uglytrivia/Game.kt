@@ -101,16 +101,12 @@ class Game {
     }
 
     private fun currentCategory(): String {
-        if (places[currentPlayer] == 0) return "Pop"
-        if (places[currentPlayer] == 4) return "Pop"
-        if (places[currentPlayer] == 8) return "Pop"
-        if (places[currentPlayer] == 1) return "Science"
-        if (places[currentPlayer] == 5) return "Science"
-        if (places[currentPlayer] == 9) return "Science"
-        if (places[currentPlayer] == 2) return "Sports"
-        if (places[currentPlayer] == 6) return "Sports"
-        if (places[currentPlayer] == 10) return "Sports"
-        return "Rock"
+        return when(places[currentPlayer]) {
+            0,4,8 -> "Pop"
+            1,5,9 -> "Science"
+            2,6,10 -> "Sports"
+            else -> "Rock"
+        }
     }
 
     fun wasCorrectlyAnswered(): Boolean {
