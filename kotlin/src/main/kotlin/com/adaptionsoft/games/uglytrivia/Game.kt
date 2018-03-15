@@ -96,7 +96,8 @@ class Game {
             "Science" -> scienceQuestions.removeFirst()
             "Sports" -> sportsQuestions.removeFirst()
             "Rock" -> rockQuestions.removeFirst()
-        }
+            else -> throw RuntimeException("Unsupported category")
+        }.let { Printer.println(it) }
     }
 
     private fun currentCategory(): String {
