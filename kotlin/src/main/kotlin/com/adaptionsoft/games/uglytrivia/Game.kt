@@ -6,7 +6,6 @@ import java.util.*
 class Game {
     var players = ArrayList<Player>()
     var places = IntArray(6)
-    var purses = IntArray(6)
 
     var popQuestions = LinkedList<Any>()
     var scienceQuestions = LinkedList<Any>()
@@ -41,7 +40,6 @@ class Game {
 
         players.add(Player(playerName))
         places[howManyPlayers()] = 0
-        purses[howManyPlayers()] = 0
 
         Printer.println(playerName + " was added")
         Printer.println("They are player number " + players.size)
@@ -111,10 +109,11 @@ class Game {
         if (players[currentPlayer].inPenaltyBox) {
             if (isGettingOutOfPenaltyBox) {
                 Printer.println("Answer was correct!!!!")
-                purses[currentPlayer]++
+                players[currentPlayer].goldCoins++
+
                 Printer.println(players[currentPlayer].toString()
                         + " now has "
-                        + purses[currentPlayer]
+                        + players[currentPlayer].goldCoins
                         + " Gold Coins.")
 
                 val winner = didPlayerWin()
@@ -131,10 +130,10 @@ class Game {
         } else {
 
             Printer.println("Answer was correct!!!!")
-            purses[currentPlayer]++
+            players[currentPlayer].goldCoins++
             Printer.println(players[currentPlayer].toString()
                     + " now has "
-                    + purses[currentPlayer]
+                    + players[currentPlayer].goldCoins
                     + " Gold Coins.")
 
             val winner = didPlayerWin()
@@ -159,6 +158,6 @@ class Game {
     }
 
     private fun didPlayerWin(): Boolean {
-        return purses[currentPlayer] != 6
+        return players[currentPlayer].goldCoins != 6
     }
 }
