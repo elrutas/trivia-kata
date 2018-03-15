@@ -7,7 +7,6 @@ class Game {
     var players = ArrayList<Player>()
     var places = IntArray(6)
     var purses = IntArray(6)
-    var inPenaltyBox = BooleanArray(6)
 
     var popQuestions = LinkedList<Any>()
     var scienceQuestions = LinkedList<Any>()
@@ -43,7 +42,6 @@ class Game {
         players.add(Player(playerName))
         places[howManyPlayers()] = 0
         purses[howManyPlayers()] = 0
-        inPenaltyBox[howManyPlayers()] = false
 
         Printer.println(playerName + " was added")
         Printer.println("They are player number " + players.size)
@@ -58,7 +56,7 @@ class Game {
         Printer.println(players[currentPlayer].toString() + " is the current player")
         Printer.println("They have rolled a " + roll)
 
-        if (inPenaltyBox[currentPlayer]) {
+        if (players[currentPlayer].inPenaltyBox) {
             if (roll % 2 != 0) {
                 isGettingOutOfPenaltyBox = true
 
@@ -110,7 +108,7 @@ class Game {
     }
 
     fun wasCorrectlyAnswered(): Boolean {
-        if (inPenaltyBox[currentPlayer]) {
+        if (players[currentPlayer].inPenaltyBox) {
             if (isGettingOutOfPenaltyBox) {
                 Printer.println("Answer was correct!!!!")
                 purses[currentPlayer]++
@@ -149,7 +147,7 @@ class Game {
     fun wrongAnswer(): Boolean {
         Printer.println("Question was incorrectly answered")
         Printer.println(players[currentPlayer].toString() + " was sent to the penalty box")
-        inPenaltyBox[currentPlayer] = true
+        players[currentPlayer].inPenaltyBox = true
 
         moveTurnToNextPlayer()
         return true
