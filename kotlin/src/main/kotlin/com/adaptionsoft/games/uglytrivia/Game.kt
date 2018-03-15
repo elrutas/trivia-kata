@@ -4,7 +4,7 @@ import com.adaptionsoft.games.trivia.runner.Printer
 import java.util.*
 
 class Game {
-    var players = ArrayList<Any>()
+    var players = ArrayList<Player>()
     var places = IntArray(6)
     var purses = IntArray(6)
     var inPenaltyBox = BooleanArray(6)
@@ -40,7 +40,7 @@ class Game {
 
     fun add(playerName: String): Boolean {
 
-        players.add(playerName)
+        players.add(Player(playerName))
         places[howManyPlayers()] = 0
         purses[howManyPlayers()] = 0
         inPenaltyBox[howManyPlayers()] = false
