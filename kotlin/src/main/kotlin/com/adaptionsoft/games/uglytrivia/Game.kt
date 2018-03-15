@@ -40,7 +40,6 @@ class Game {
 
     fun add(playerName: String): Boolean {
 
-
         players.add(playerName)
         places[howManyPlayers()] = 0
         purses[howManyPlayers()] = 0
@@ -92,14 +91,12 @@ class Game {
     }
 
     private fun askQuestion() {
-        if (currentCategory() === "Pop")
-            Printer.println(popQuestions.removeFirst())
-        if (currentCategory() === "Science")
-            Printer.println(scienceQuestions.removeFirst())
-        if (currentCategory() === "Sports")
-            Printer.println(sportsQuestions.removeFirst())
-        if (currentCategory() === "Rock")
-            Printer.println(rockQuestions.removeFirst())
+        when (currentCategory()) {
+            "Pop" -> popQuestions.removeFirst()
+            "Science" -> scienceQuestions.removeFirst()
+            "Sports" -> sportsQuestions.removeFirst()
+            "Rock" -> rockQuestions.removeFirst()
+        }
     }
 
     private fun currentCategory(): String {
@@ -126,13 +123,12 @@ class Game {
                         + " Gold Coins.")
 
                 val winner = didPlayerWin()
-                currentPlayer++
-                if (currentPlayer == players.size) currentPlayer = 0
+
+                moveTurnToNextPlayer()
 
                 return winner
             } else {
-                currentPlayer++
-                if (currentPlayer == players.size) currentPlayer = 0
+                moveTurnToNextPlayer()
                 return true
             }
 
@@ -147,8 +143,7 @@ class Game {
                     + " Gold Coins.")
 
             val winner = didPlayerWin()
-            currentPlayer++
-            if (currentPlayer == players.size) currentPlayer = 0
+            moveTurnToNextPlayer()
 
             return winner
         }
@@ -159,9 +154,13 @@ class Game {
         Printer.println(players[currentPlayer].toString() + " was sent to the penalty box")
         inPenaltyBox[currentPlayer] = true
 
+        moveTurnToNextPlayer()
+        return true
+    }
+
+    private fun moveTurnToNextPlayer() {
         currentPlayer++
         if (currentPlayer == players.size) currentPlayer = 0
-        return true
     }
 
     private fun didPlayerWin(): Boolean {
